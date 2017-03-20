@@ -114,12 +114,17 @@ function cacheFunction(cb) {
 var cache = {0: 0};
 
 return function(num){
+  var p = num;
+  if(cache.hasOwnProperty(p)) return cache[p];
+/*
   for (var prop in cache){
-    if(prop === num) return cache[prop];
+    if(prop === p) return cache[prop];
   }  
-  var val = cb(num);
-  cache.key = num;
-  cache.value = val;
+*/
+  var val = cb(p);
+  cache[p] = val;
+  //cache.key = num;
+  //cache.value = val;
   return val;
   };
 }
